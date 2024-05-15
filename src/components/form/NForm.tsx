@@ -1,11 +1,10 @@
 import { FormProvider, useForm } from "react-hook-form";
 
-const NForm = ({ onsubmit, children }) => {
+const NForm = ({ onSubmit, children }) => {
   const methods = useForm();
-
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onsubmit)}>{children}</form>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
     </FormProvider>
   );
 };

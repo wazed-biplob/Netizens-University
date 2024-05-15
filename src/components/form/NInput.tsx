@@ -1,17 +1,15 @@
 import { Input } from "antd";
-import { Controller, useForm, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
-const NInput = () => {
-  const { register } = useFormContext();
+const NInput = ({ type, name, label }) => {
   return (
-    <>
-      <input type="text" id="name" {...register("name")} />
-      {/* {label ? label : null}
+    <div style={{ marginBottom: "20px" }}>
+      {label ? label : null}
       <Controller
         name={name}
         render={({ field }) => <Input {...field} type={type} id={name} />}
-      ></Controller> */}
-    </>
+      />
+    </div>
   );
 };
 

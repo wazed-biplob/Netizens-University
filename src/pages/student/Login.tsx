@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { Button, Row } from "antd";
+import { useForm, useFormContext } from "react-hook-form";
 import { useLoginMutation } from "../../redux/feature/auth/authApi";
 import { useAppDispatch } from "../../redux/feature/hook";
 import { setUser } from "../../redux/feature/auth/authSlice";
@@ -7,6 +7,8 @@ import { verifyToken } from "../../utils/jwtDecode";
 import { useNavigate } from "react-router-dom";
 import { JwtPayload } from "jwt-decode";
 import { toast } from "sonner";
+import NForm from "../../components/form/NForm";
+import NInput from "../../components/form/NInput";
 
 interface IUser {
   userId: string;
@@ -18,8 +20,9 @@ interface IUser {
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const [login, { data }] = useLoginMutation();
+  // const { register, handleSubmit } = useForm();
+  const [login] = useLoginMutation();
+
   const onSubmit = async (data: { id: string; password: string }) => {
     const toastId = toast.loading("Loading");
     try {
@@ -27,6 +30,7 @@ const Login = () => {
         id: data.id,
         password: data.password,
       };
+      console.log(userInfo);
       const res = await login(userInfo).unwrap();
       const user = verifyToken(res.data.accessToken) as IUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
@@ -37,20 +41,15 @@ const Login = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
-      <label htmlFor="name">Name</label>
-      <input className="border mx-2 inline" type="text" {...register("id")} />
-
-      <label htmlFor="password">Password</label>
-      <input
-        className="border mx-2 inline"
-        type="text"
-        {...register("password")}
-      />
-      <Button htmlType="submit" className="border mx-2 px-2">
-        Submit
-      </Button>
-    </form>
+    <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <NForm onSubmit={onSubmit}>
+        <NInput type="text" name="id" label="Name" />
+        <NInput type="text" name="password" label="Password" />
+        <Button htmlType="submit" className="border px-2">
+          Submit
+        </Button>
+      </NForm>
+    </Row>
   );
 };
 
