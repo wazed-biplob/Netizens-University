@@ -4,8 +4,15 @@ import Sider from "antd/es/layout/Sider";
 import { Menu } from "antd";
 import { useAppSelector } from "../../redux/feature/hook";
 import { useCurrentUser } from "../../redux/feature/auth/authSlice";
+interface IUser {
+  userId: string;
+  role: string;
+  iat: number;
+  exp: number;
+}
 const Sidebar = () => {
-  const user = useAppSelector(useCurrentUser);
+  const user = useAppSelector(useCurrentUser) as IUser;
+
   const userRole = {
     ADMIN: "admin",
     FACULTY: "faculty",
@@ -14,9 +21,10 @@ const Sidebar = () => {
 
   let sidebarItems;
 
-  switch (user!.role) {
+  switch (user?.role) {
     case userRole.ADMIN:
       sidebarItems = adminSidebarItems(adminPaths, "admin");
+
       break;
     case userRole.FACULTY:
       sidebarItems = adminSidebarItems(adminPaths, "faculty");
@@ -27,7 +35,11 @@ const Sidebar = () => {
   }
   return (
     <>
-      <Sider breakpoint="lg" collapsedWidth="0">
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        style={{ height: "100vh", position: "sticky", top: 0, left: 0 }}
+      >
         <div className="text-white font-3xl text-center py-2">
           Netizens University
         </div>

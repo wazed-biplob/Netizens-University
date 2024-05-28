@@ -1,22 +1,14 @@
-import { Form, Input } from "antd";
+import { DatePicker, Form } from "antd";
 import { Controller } from "react-hook-form";
 
-const NInput = ({
-  type,
-  name,
-  label,
-}: {
-  type: string;
-  name: string;
-  label?: string;
-}) => {
+const NDatePicker = ({ name, label }: { name: string; label?: string }) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Controller
         name={name}
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} id={name} size="large" />
+            <DatePicker {...field} size="large" style={{ width: "100%" }} />
           </Form.Item>
         )}
       />
@@ -24,4 +16,4 @@ const NInput = ({
   );
 };
 
-export default NInput;
+export default NDatePicker;

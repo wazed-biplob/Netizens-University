@@ -1,7 +1,12 @@
 import AcademicSemestre from "../pages/admin/AcademicManagement/AcademicSemestre";
+import CreateAcademicSemestre from "../pages/admin/AcademicManagement/CreateAcademicSemestre";
+import RegisteredSemestres from "../pages/admin/CourseManagement/RegisteredSemestres";
+import SemestreRegistration from "../pages/admin/CourseManagement/SemestreRegistration";
 import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateStudent from "../pages/admin/CreateStudent";
 import DashbaordLayout from "../pages/admin/DashbaordLayout";
+import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
+import StudentData from "../pages/admin/UserManagement/StudentData";
+import StudentDetails from "../pages/admin/UserManagement/StudentDetails";
 import CreateFaculty from "../pages/faculty/CreateFaculty";
 
 export interface IRoute {
@@ -10,14 +15,16 @@ export interface IRoute {
   children?: IRoute[];
 }
 
-export interface IItem {
-  name: string;
-  path?: string;
-  element?: React.ReactNode;
-  children?: IItem[];
-}
+export type TItem =
+  | {
+      name?: string;
+      path?: string;
+      element?: React.ReactNode;
+      children?: TItem[];
+    }
+  | undefined;
 
-export const adminPaths: IItem[] = [
+export const adminPaths: TItem[] = [
   {
     name: "Dashboard",
     path: "dashboard",
@@ -31,8 +38,35 @@ export const adminPaths: IItem[] = [
         path: "academic-semestre",
         element: <AcademicSemestre />,
       },
+
+      {
+        name: "Create A. Semestre",
+        path: "create-academic-semestre",
+        element: <CreateAcademicSemestre />,
+      },
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <AcademicSemestre />,
+      },
+      {
+        name: "Academic Faculty",
+        path: "academic-faculty",
+        element: <AcademicSemestre />,
+      },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <AcademicSemestre />,
+      },
+      {
+        name: "Academic Department",
+        path: "academic-department",
+        element: <AcademicSemestre />,
+      },
     ],
   },
+
   {
     name: "User Management",
     children: [
@@ -40,6 +74,11 @@ export const adminPaths: IItem[] = [
         name: "Create Student",
         path: "create-student",
         element: <CreateStudent />,
+      },
+      { name: "Student", path: "student-data", element: <StudentData /> },
+      {
+        path: "student-data/:studentId",
+        element: <StudentDetails />,
       },
       {
         name: "Create Admin",
@@ -50,6 +89,31 @@ export const adminPaths: IItem[] = [
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty />,
+      },
+    ],
+  },
+  {
+    name: "Course Management",
+    children: [
+      {
+        name: "Semestre Registration",
+        path: "semestre-registration",
+        element: <SemestreRegistration />,
+      },
+      {
+        name: "Registered Semestres",
+        path: "registered-semestres",
+        element: <RegisteredSemestres />,
+      },
+      {
+        name: "Semestre Registration",
+        path: "semestre-registration",
+        element: <SemestreRegistration />,
+      },
+      {
+        name: "Semestre Registration",
+        path: "semestre-registration",
+        element: <SemestreRegistration />,
       },
     ],
   },

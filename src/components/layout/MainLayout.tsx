@@ -45,10 +45,10 @@ const { Header, Content, Footer } = Layout;
 const MainLayout = () => {
   const dispatch = useAppDispatch();
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
   return (
-    <Layout style={{ height: "100vh", gap: "0px", margin: "0", padding: "0" }}>
+    <Layout style={{ height: "100%", gap: "0px", margin: "0", padding: "0" }}>
       <Sidebar />
       <Layout>
         <Header>

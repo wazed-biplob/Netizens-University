@@ -1,13 +1,9 @@
-import {
-  IAcademicSemestre,
-  IQueryParam,
-  IResponseRedux,
-} from "../../../global";
+import { IQueryParam, IResponseRedux, IStudent } from "../../../global";
 import { baseAPI } from "../api/baseApi";
 
-const academicSemestreApi = baseAPI.injectEndpoints({
+const userManagementApi = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
-    getAllSemestres: builder.query({
+    getAllStudents: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args) {
@@ -15,20 +11,21 @@ const academicSemestreApi = baseAPI.injectEndpoints({
             params.append(item.name, item.value as string)
           );
         }
+
         return {
-          url: "/academic-semesters",
+          url: "/students",
           method: "GET",
           params: params,
         };
       },
-      transformResponse: (response: IResponseRedux<IAcademicSemestre[]>) => ({
+      transformResponse: (response: IResponseRedux<IStudent[]>) => ({
         data: response.data,
         meta: response.meta,
       }),
     }),
-    addAcademicSemestres: builder.mutation({
+    addStudent: builder.mutation({
       query: (data) => ({
-        url: "/academic-semesters/create-academic-semester",
+        url: "/users/create-student",
         method: "POST",
         body: data,
       }),
@@ -37,6 +34,6 @@ const academicSemestreApi = baseAPI.injectEndpoints({
 });
 
 export const {
-  useGetAllSemestresQuery,
-  useAddAcademicSemestresMutation,
-} = academicSemestreApi;
+  useAddStudentMutation,
+  useGetAllStudentsQuery,
+} = userManagementApi;
