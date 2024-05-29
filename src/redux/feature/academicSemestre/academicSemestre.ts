@@ -33,10 +33,21 @@ const academicSemestreApi = baseAPI.injectEndpoints({
         body: data,
       }),
     }),
+    getAcademicFaculties: builder.query({
+      query: () => ({
+        url: "/academic-faculties",
+        method: "GET",
+      }),
+      transformResponse: (response) => ({
+        data: response?.data,
+        meta: response?.meta,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAllSemestresQuery,
   useAddAcademicSemestresMutation,
+  useGetAcademicFacultiesQuery,
 } = academicSemestreApi;

@@ -5,10 +5,12 @@ const NInput = ({
   type,
   name,
   label,
+  disabled,
 }: {
   type: string;
   name: string;
   label?: string;
+  disabled?: boolean;
 }) => {
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -16,7 +18,13 @@ const NInput = ({
         name={name}
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} id={name} size="large" />
+            <Input
+              {...field}
+              type={type}
+              id={name}
+              size="large"
+              disabled={disabled}
+            />
           </Form.Item>
         )}
       />

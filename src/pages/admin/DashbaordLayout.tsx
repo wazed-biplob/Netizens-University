@@ -1,7 +1,7 @@
 const DashbaordLayout = () => {
   return (
     <div>
-      <p>Dashobard</p>
+      <p>Student Dashobard</p>
     </div>
   );
 };

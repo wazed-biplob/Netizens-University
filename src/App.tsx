@@ -3,10 +3,9 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 
 const App = () => {
   return (
-    <><ProtectedRoute>
+    <ProtectedRoute role={undefined}>
       <MainLayout />
     </ProtectedRoute>
-    </>
   );
 };
 

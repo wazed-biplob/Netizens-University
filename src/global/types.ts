@@ -41,3 +41,15 @@ export interface IQueryParam {
   name: string;
   value: boolean | React.Key | string;
 }
+
+export interface ISemester {
+  _id: string;
+  academicSemester: IAcademicSemestre;
+  status: string;
+  startDate: string;
+  endDate: string;
+  minCredit: number;
+  maxCredit: number;
+  createdAt: string;
+  updatedAt: string;
+}

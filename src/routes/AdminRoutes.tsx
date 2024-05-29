@@ -1,5 +1,8 @@
 import AcademicSemestre from "../pages/admin/AcademicManagement/AcademicSemestre";
 import CreateAcademicSemestre from "../pages/admin/AcademicManagement/CreateAcademicSemestre";
+import Courses from "../pages/admin/CourseManagement/Courses";
+import CreateCourse from "../pages/admin/CourseManagement/CreateCourse";
+import OfferedCourses from "../pages/admin/CourseManagement/OfferedCourses";
 import RegisteredSemestres from "../pages/admin/CourseManagement/RegisteredSemestres";
 import SemestreRegistration from "../pages/admin/CourseManagement/SemestreRegistration";
 import CreateAdmin from "../pages/admin/CreateAdmin";
@@ -7,7 +10,6 @@ import DashbaordLayout from "../pages/admin/DashbaordLayout";
 import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
 import StudentData from "../pages/admin/UserManagement/StudentData";
 import StudentDetails from "../pages/admin/UserManagement/StudentDetails";
-import CreateFaculty from "../pages/faculty/CreateFaculty";
 
 export interface IRoute {
   path: string;
@@ -85,11 +87,11 @@ export const adminPaths: TItem[] = [
         path: "create-admin",
         element: <CreateAdmin />,
       },
-      {
-        name: "Create Faculty",
-        path: "create-faculty",
-        element: <CreateFaculty />,
-      },
+      // {
+      //   name: "Create Faculty",
+      //   path: "create-faculty",
+      //   element: <CreateFaculty />,
+      // },
     ],
   },
   {
@@ -106,14 +108,19 @@ export const adminPaths: TItem[] = [
         element: <RegisteredSemestres />,
       },
       {
-        name: "Semestre Registration",
-        path: "semestre-registration",
-        element: <SemestreRegistration />,
+        name: "Courses",
+        path: "courses",
+        element: <Courses />,
       },
       {
-        name: "Semestre Registration",
-        path: "semestre-registration",
-        element: <SemestreRegistration />,
+        name: "Create Course",
+        path: "create-course",
+        element: <CreateCourse />,
+      },
+      {
+        name: "Offered Courses",
+        path: "offered-course",
+        element: <OfferedCourses />,
       },
     ],
   },

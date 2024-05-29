@@ -11,13 +11,13 @@ import { IResponse } from "../../../global";
 import { useAddRegisteredSemestreMutation } from "../../../redux/feature/courseManagement";
 
 const SemestreRegistration = () => {
-  const { data: academicSemestreData } = useGetAllSemestresQuery([
+  const { data: semesterData } = useGetAllSemestresQuery([
     { name: "sort", value: "year" },
   ]);
 
   const [addSemestre] = useAddRegisteredSemestreMutation(undefined);
 
-  const academicSemestreOptions = academicSemestreData?.data?.map((item) => ({
+  const academicSemestreOptions = semesterData?.data?.map((item) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
@@ -44,7 +44,7 @@ const SemestreRegistration = () => {
   };
 
   return (
-    <div>
+    <>
       <Flex justify="center" align="center">
         <Col span={6}>
           <NForm onSubmit={onSubmit}>
@@ -68,7 +68,7 @@ const SemestreRegistration = () => {
           </NForm>
         </Col>
       </Flex>
-    </div>
+    </>
   );
 };
 

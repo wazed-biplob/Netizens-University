@@ -1,4 +1,5 @@
 import { Form, Select } from "antd";
+import { useEffect } from "react";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 
 interface ISelectProps {
@@ -7,9 +8,25 @@ interface ISelectProps {
   options?: { value: string; label: string; disabled?: boolean }[] | undefined;
   disabled?: boolean;
   mode?: "multiple" | undefined;
+  onValueChange?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NSelect = ({ name, label, options, disabled, mode }: ISelectProps) => {
+const NSelectWatch = ({
+  name,
+  label,
+  options,
+  disabled,
+  mode,
+  onValueChange,
+}: ISelectProps) => {
+  const method = useFormContext();
+  const inputValue = useWatch({
+    control: method.control,
+    name: name,
+  });
+  useEffect(() => {
+    onValueChange(inputValue);
+  }, [inputValue]);
   return (
     <Controller
       name={name}
@@ -30,4 +47,4 @@ const NSelect = ({ name, label, options, disabled, mode }: ISelectProps) => {
   );
 };
 
-export default NSelect;
+export default NSelectWatch;

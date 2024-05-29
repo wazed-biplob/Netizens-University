@@ -3,7 +3,12 @@ import { adminPaths } from "../../routes/AdminRoutes";
 import Sider from "antd/es/layout/Sider";
 import { Menu } from "antd";
 import { useAppSelector } from "../../redux/feature/hook";
-import { useCurrentUser } from "../../redux/feature/auth/authSlice";
+import {
+  useCurrentToken,
+  useCurrentUser,
+} from "../../redux/feature/auth/authSlice";
+import { studentPaths } from "../../routes/StudentRoutes";
+import { verifyToken } from "../../utils/jwtDecode";
 interface IUser {
   userId: string;
   role: string;
@@ -11,7 +16,11 @@ interface IUser {
   exp: number;
 }
 const Sidebar = () => {
-  const user = useAppSelector(useCurrentUser) as IUser;
+  const token = useAppSelector(useCurrentToken);
+  let user;
+  if (token) {
+    user = verifyToken(token) as IUser;
+  }
 
   const userRole = {
     ADMIN: "admin",
@@ -30,7 +39,7 @@ const Sidebar = () => {
       sidebarItems = adminSidebarItems(adminPaths, "faculty");
       break;
     case userRole.STUDENT:
-      sidebarItems = adminSidebarItems(adminPaths, "student");
+      sidebarItems = adminSidebarItems(studentPaths, "student");
       break;
   }
   return (

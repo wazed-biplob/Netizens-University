@@ -3,25 +3,22 @@ import About from "../pages/About";
 import App from "../App";
 import { routesGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./AdminRoutes";
-// import { facultyPaths } from "./FacultyRoutes";
-// import { studentPaths } from "./StudentRoutes";
 import Login from "../pages/student/Login";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { studentPaths } from "./StudentRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [
-      {
-        path: "about",
-        element: <About />,
-      },
-    ],
   },
   {
     path: "/admin",
-    element: <ProtectedRoute> <App /></ProtectedRoute>,
+    element: (
+      <ProtectedRoute role="admin">
+        <App />
+      </ProtectedRoute>
+    ),
     children: routesGenerator(adminPaths),
   },
   // {
@@ -29,11 +26,15 @@ export const router = createBrowserRouter([
   //   element: <App />,
   //   children: routesGenerator(facultyPaths),
   // },
-  // {
-  //   path: "/student",
-  //   element: <App />,
-  //   children: routesGenerator(studentPaths),
-  // },
+  {
+    path: "/student",
+    element: (
+      <ProtectedRoute role="student">
+        <App />,
+      </ProtectedRoute>
+    ),
+    children: routesGenerator(studentPaths),
+  },
   {
     path: "/login",
     element: <Login />,
